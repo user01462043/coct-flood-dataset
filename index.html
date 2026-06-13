@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cape Town Flood-Events Database</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="hero" id="top">
+    <nav class="topbar">
+      <div class="brand">Cape Town Flood-Events Database</div>
+      <div class="navlinks">
+        <button class="navBtn active" data-view="home">Home</button>
+        <button class="navBtn" data-view="about">About</button>
+        <button class="navBtn" data-view="framework">Framework</button>
+        <button class="navBtn" data-view="methodology">Methodology</button>
+        <button class="navBtn" data-view="limitations">Limitations</button>
+        <button class="navBtn primaryNav" data-view="explorer">Engage with data</button>
+      </div>
+    </nav>
+    <div class="heroContent">
+      <p class="eyebrow">CASCADE · CSAG · University of Cape Town</p>
+      <h1>Interactive flood-impact database for Cape Town</h1>
+      <p class="lead">A working prototype linking multi-source flood impact records to City of Cape Town spatial boundaries. Users can inspect polygons, filter records, view trends, understand impact classifications, and download the filtered dataset.</p>
+      <div class="heroActions">
+        <button class="btn primary viewBtn" data-view="explorer">Open data explorer</button>
+        <button class="btn viewBtn" data-view="methodology">View methodology</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="siteMain">
+    <section id="home" class="section view activeView homeView">
+      <p class="sectionTag">Website contents</p>
+      <h2>Choose what you want to view</h2>
+      <p>This version is organised like a web app. Each button opens one section only, instead of making users scroll through a long report-style page.</p>
+      <div class="tocGrid">
+        <button class="tocCard viewBtn" data-view="about"><span>01</span><h3>About the database</h3><p>Background, purpose, study objectives and why this platform is useful.</p></button>
+        <button class="tocCard viewBtn" data-view="framework"><span>02</span><h3>Framework</h3><p>Flood impact categories, classification codes and severity descriptions.</p></button>
+        <button class="tocCard viewBtn" data-view="methodology"><span>03</span><h3>Methodology</h3><p>Source-specific methods for SAWS, news articles, FloodList, EM-DAT and service requests.</p></button>
+        <button class="tocCard viewBtn" data-view="limitations"><span>04</span><h3>Limitations</h3><p>How users should interpret the database responsibly.</p></button>
+        <button class="tocCard viewBtn emphasised" data-view="explorer"><span>05</span><h3>Engage with data</h3><p>Interactive map, filters, charts, records table and download button.</p></button>
+      </div>
+    </section>
+
+    <section id="about" class="view class="section twoCol">
+      <div>
+        <p class="sectionTag">Background</p>
+        <h2>Why this database?</h2>
+        <p>Flooding is a persistent and growing urban hazard in sub-Saharan Africa. In this project, a flood event is understood as the temporary inundation of areas not normally covered by water, caused by overflowing water bodies or by the accumulation of surface or sea water, where observable disruption occurs.</p>
+        <p>Neighbourhood-scale flood impacts are often not systematically captured by hazard-focused systems. Instead, local disruptions are reported across fragmented sources such as news media, climate summaries, municipal records and disaster databases. This platform therefore brings those records into one spatially explorable prototype for the City of Cape Town.</p>
+        <p>The current study focuses on Cape Town flood occurrence and reported impacts, with future work aimed at linking the database to precipitation, health, vulnerability and infrastructure datasets.</p>
+      </div>
+      <figure class="infoFigure">
+        <img src="assets/doc_images/figure_1.png" alt="Flood data processing workflow figure" />
+        <figcaption>Example workflow figure extracted from the methodology document. Replace or refine this figure later if needed.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section objectives view" id="objectives">
+      <p class="sectionTag">Study objectives</p>
+      <h2>What the platform supports</h2>
+      <div class="cards four">
+        <article><h3>Event chronology</h3><p>Develop a multi-source flood event chronology for Cape Town.</p></article>
+        <article><h3>Source comparison</h3><p>Compare SAWS, FloodList, news archives, EM-DAT and municipal service request records as they are integrated.</p></article>
+        <article><h3>Spatial hotspots</h3><p>Identify recurrently affected areas and possible under-reported locations.</p></article>
+        <article><h3>Rainfall linkage</h3><p>Prepare the database for comparison with precursor precipitation and future climate-health analysis.</p></article>
+      </div>
+    </section>
+
+    <section id="framework" class="section view">
+      <div class="sectionHeader">
+        <div>
+          <p class="sectionTag">Framework</p>
+          <h2>Flood impact extraction and classification</h2>
+        </div>
+        <input id="frameworkSearch" class="miniSearch" placeholder="Search framework table, e.g. evacuation, roads, 1.3" />
+      </div>
+      <p>The database uses a flood impact classification framework adapted from Diakakis et al. (2020). Impacts are grouped into four domains: built environment, mobile objects, natural environment, and human population. Class numbers are ordinal within each domain, meaning higher numbers indicate greater impact severity within that category.</p>
+      <div class="frameworkNote"><strong>Important:</strong> a code such as <b>1.3</b> does not mean the same type of severity as <b>4.3</b>. The first number is the impact domain; the second number is the class within that domain.</div>
+      <div id="impactFrameworkTable" class="tableWrap"></div>
+    </section>
+
+    <section id="methodology" class="section view">
+      <p class="sectionTag">Methodology</p>
+      <h2>Data sources and processing workflows</h2>
+      <p>Click each source below to view the access route, extraction approach, processing workflow and main limitations. The figures can be replaced with cleaner final versions later.</p>
+      <div class="methodTabs" role="tablist">
+        <button class="tab active" data-method="saws">SAWS</button>
+        <button class="tab" data-method="news">News articles</button>
+        <button class="tab" data-method="floodlist">FloodList</button>
+        <button class="tab" data-method="emdat">EM-DAT</button>
+        <button class="tab" data-method="service">Service requests</button>
+      </div>
+      <div id="methodContent" class="methodContent"></div>
+    </section>
+
+    <section id="limitations" class="section view">
+      <p class="sectionTag">Limitations and responsible use</p>
+      <h2>How users should interpret the data</h2>
+      <div class="cards three">
+        <article><h3>Fragmented reporting</h3><p>Flood impacts are reported unevenly across media, institutional and administrative sources. Smaller or less-publicised events may be under-represented.</p></article>
+        <article><h3>Variable spatial precision</h3><p>Some records are suburb-level while others are broader, such as Cape Town or Western Cape. This affects hotspot mapping and polygon-level interpretation.</p></article>
+        <article><h3>Validation is ongoing</h3><p>AI-assisted extraction was checked through reviewer validation, but some records still need source verification, de-duplication and methodological refinement.</p></article>
+      </div>
+    </section>
+
+    <section id="explorer" class="section explorerSection view">
+      <div class="sectionHeader">
+        <div>
+          <p class="sectionTag">Engage with the dataset</p>
+          <h2>Interactive map and downloadable records</h2>
+          <p>Hover over polygons to inspect record counts. Click a polygon to filter the database to that location. Use the filters to explore source, year and impact category patterns.</p>
+        </div>
+        <button id="downloadBtn">Download filtered CSV</button>
+      </div>
+
+      <div class="explorerGrid">
+        <aside class="panel">
+          <h3>Filters</h3>
+          <label>Map layer</label>
+          <select id="layerSelect">
+            <option value="sp">Small Place (SP_NAME)</option>
+            <option value="mp">Main Place (MP_NAME)</option>
+            <option value="municipality">Municipality</option>
+          </select>
+
+          <label>Location</label>
+          <select id="locationSelect"><option value="all">All locations</option></select>
+
+          <label>Source</label>
+          <select id="sourceSelect"><option value="all">All sources</option></select>
+
+          <label>Impact category</label>
+          <select id="categorySelect"><option value="all">All categories</option></select>
+
+          <label>Start year</label>
+          <select id="startYearSelect"><option value="all">All</option></select>
+
+          <label>End year</label>
+          <select id="endYearSelect"><option value="all">All</option></select>
+
+          <label>Keyword search</label>
+          <input id="searchInput" placeholder="e.g. Khayelitsha, roads, shacks" />
+
+          <button id="resetBtn">Reset filters</button>
+
+          <h3>Insights</h3>
+          <div class="kpis">
+            <div><strong id="kpiRecords">0</strong><span>records</span></div>
+            <div><strong id="kpiPlaces">0</strong><span>places</span></div>
+            <div><strong id="kpiYears">0</strong><span>years</span></div>
+          </div>
+          <div id="selectedArea" class="selected">Hover/click a polygon to inspect it.</div>
+          <h4>Top affected locations</h4>
+          <ol id="topLocations"></ol>
+        </aside>
+
+        <section class="mapwrap">
+          <div id="map"></div>
+          <div class="charts">
+            <div class="chartbox"><h3>Flood impact records over time</h3><canvas id="timeChart"></canvas></div>
+            <div class="chartbox"><h3>Impact categories</h3><canvas id="categoryChart"></canvas></div>
+          </div>
+          <section class="records">
+            <h2>Filtered records</h2>
+            <div id="recordsTable"></div>
+          </section>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Prototype for discussion and refinement. Suggested public setup: archive dataset on ZivaHub, host the interactive tool through CASCADE/GitHub Pages/Netlify, and link both from the project page.</p>
+    <a href="#top">Back to top</a>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
