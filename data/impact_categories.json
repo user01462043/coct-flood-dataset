@@ -2,6 +2,35 @@
   {
     "category": "Built environment",
     "category_number": "1",
+    "class_number": "0",
+    "code": "1.0",
+    "description": "Built environment impact reported, but severity level not specified."
+  },
+  {
+    "category": "Mobile objects",
+    "category_number": "2",
+    "class_number": "0",
+    "code": "2.0",
+    "description": "Mobile object impact reported, but severity level not specified."
+  },
+  {
+    "category": "Natural environment",
+    "category_number": "3",
+    "class_number": "0",
+    "code": "3.0",
+    "description": "Natural environment impact reported, but severity level not specified."
+  },
+  {
+    "category": "Human population",
+    "category_number": "4",
+    "class_number": "0",
+    "code": "4.0",
+    "description": "Human population impact reported, but severity level not specified."
+  },  
+  
+  {
+    "category": "Built environment",
+    "category_number": "1",
     "class_number": "1",
     "code": "1.1",
     "description": "Yard/Garden/Piloti suffer inundation on individual buildings. Inundation occurs of road or sidewalk surface. Low water crossings are flooded. No structural damages appear on any infrastructure or individual buildings."

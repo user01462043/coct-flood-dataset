@@ -1,5 +1,5 @@
 {
-  "records": 2560,
+  "records": 13997,
   "sheets": [
     "SAWSValidation",
     "NewsValidation ",
@@ -11,7 +11,9 @@
   "sources": [
     "FloodList",
     "News article",
-    "SAWS"
+    "SAWS",
+    "EM-DAT",
+    "Service Requests"
   ],
   "years": [
     "2010",
